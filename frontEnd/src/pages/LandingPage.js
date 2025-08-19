@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from 'react';
 
 function LandingPage({ onLogin }) {
   return (
@@ -44,20 +45,12 @@ function LandingPage({ onLogin }) {
             >
               Facebook Page
             </a>
-            <button
-              onClick={onLogin}
-              style={{
-                padding: "12px 24px",
-                border: "2px solid #2563eb",
-                color: "#2563eb",
-                fontWeight: "600",
-                borderRadius: "8px",
-                background: "white",
-                cursor: "pointer"
-              }}
+            <a
+              href="/login"
+              className="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold rounded-lg"
             >
               Системд нэвтрэх
-            </button>
+            </a>
           </div>
         </div>
       </section>
