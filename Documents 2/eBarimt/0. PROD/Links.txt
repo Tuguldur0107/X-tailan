@@ -1,0 +1,8 @@
+1. Эхлээд дараах мерчантын жагсаалтад байгаа эсэхийг шалгана.
+http://ebarimt.chipmo.mn:7080/web/
+2. Оператор эрхээрээ орж мерчантаа нэмэх хүсэлт өгч, тухайн харилцагчаараа батлуулна. 
+https://operator.ebarimt.mn/home
+ДДТД - TIN - https://developer.itc.gov.mn/docs/ebarimt-api/8k74b5fubsna0-tatvar-t-l-gchijn-dugaar-lavlah-servis-tin-civil-id
+
+3. Харилцагчид батлуулахдаа дараах сайтын Хүсэлт цэсэн доторх POS API сонголтруу ороод Операторын холболт таб дотор үүссэн "Хүлээгдэж буй" төлөвтэй хүсэлтийг батална.
+https://e-invoice.ebarimt.mn/

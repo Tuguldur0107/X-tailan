@@ -1,0 +1,312 @@
+﻿Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Rolling back assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+An exception occurred during the Rollback phase of the System.ServiceProcess.ServiceProcessInstaller installer.
+System.NullReferenceException: Object reference not set to an instance of an object.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.
+Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Rolling back assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Service ZKFingerPrint has been successfully installed.
+Creating EventLog source ZKFingerPrint in log Application...
+Committing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+Service ZKFingerPrint is being removed from the system...
+Service ZKFingerPrint was successfully removed from the system.
+Attempt to stop service ZKFingerPrint.
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+Warning: The source ZKFingerPrint is not registered on the local machine.
+Service ZKFingerPrint is being removed from the system...
+Service ZKFingerPrint was successfully removed from the system.
+Attempt to stop service ZKFingerPrint.
+Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Creating EventLog source ZKFingerPrint in log Application...
+Rolling back assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Restoring event log to previous state for source ZKFingerPrint.
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+Warning: The source ZKFingerPrint is not registered on the local machine.
+Service ZKFingerPrint is being removed from the system...
+Service ZKFingerPrint was successfully removed from the system.
+Attempt to stop service ZKFingerPrint.
+Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Service ZKFingerPrint has been successfully installed.
+Creating EventLog source ZKFingerPrint in log Application...
+Committing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+Service ZKFingerPrint is being removed from the system...
+Service ZKFingerPrint was successfully removed from the system.
+Attempt to stop service ZKFingerPrint.
+Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Creating EventLog source ZKFingerPrint in log Application...
+Rolling back assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Restoring event log to previous state for source ZKFingerPrint.
+Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Service ZKFingerPrint has been successfully installed.
+Creating EventLog source ZKFingerPrint in log Application...
+Committing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+Service ZKFingerPrint is being removed from the system...
+Service ZKFingerPrint was successfully removed from the system.
+Attempt to stop service ZKFingerPrint.
+Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Service ZKFingerPrint has been successfully installed.
+Creating EventLog source ZKFingerPrint in log Application...
+Committing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+Service ZKFingerPrint is being removed from the system...
+Service ZKFingerPrint was successfully removed from the system.
+Attempt to stop service ZKFingerPrint.
+Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Service ZKFingerPrint has been successfully installed.
+Creating EventLog source ZKFingerPrint in log Application...
+Committing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+Service ZKFingerPrint is being removed from the system...
+Service ZKFingerPrint was successfully removed from the system.
+Attempt to stop service ZKFingerPrint.
+Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Service ZKFingerPrint has been successfully installed.
+Creating EventLog source ZKFingerPrint in log Application...
+Committing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+Service ZKFingerPrint is being removed from the system...
+Service ZKFingerPrint was successfully removed from the system.
+Attempt to stop service ZKFingerPrint.
+Installing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Service ZKFingerPrint has been successfully installed.
+Creating EventLog source ZKFingerPrint in log Application...
+Committing assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: Requested registry access is not allowed.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: Requested registry access is not allowed.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: Requested registry access is not allowed.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: Requested registry access is not allowed.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: Requested registry access is not allowed.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Users\Tugsbayar\source\repos\ZKFingerPrintService\ZKFingerPrintService\bin\Debug\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: Requested registry access is not allowed.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: Requested registry access is not allowed.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe
+Removing EventLog source ZKFingerPrint.
+Service ZKFingerPrint is being removed from the system...
+Service ZKFingerPrint was successfully removed from the system.
+Attempt to stop service ZKFingerPrint.
+Installing assembly 'C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Service ZKFingerPrint has been successfully installed.
+Creating EventLog source ZKFingerPrint in log Application...
+Committing assembly 'C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe
+Installing assembly 'C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe
+Installing service ZKFingerPrint...
+Creating EventLog source ZKFingerPrint in log Application...
+Rolling back assembly 'C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.InstallLog
+   assemblypath = C:\Tugsuu\Projects\__HALAMJ\sdk\ZKFingerPrint\ZKFingerPrintService.exe
+Restoring event log to previous state for source ZKFingerPrint.

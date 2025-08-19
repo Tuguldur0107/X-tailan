@@ -1,0 +1,8 @@
+1. D: dotor oo SDK gesen folder uusgene
+2. SDK gesen folder dotor "5.3.0.26, ZKFingerPrint, ZKFingerPrint_Restart.bat" gesen file uudiig huulna
+3. "5.3.0.26" > setup.exe ajilluul suulgana
+4. Computer daa restart hiine
+5. "ZKFingerPrint" > InstallService.bat file -iig administrator mode oor ajilluulna
+6. ZKFingerPrint_Restart.bat File iig ajiluulna.
+7. Computer daa restart hiine.
+8. Halamjiin system dee orood irgen burtgeh hesegt huruunii heegee unshuulna.

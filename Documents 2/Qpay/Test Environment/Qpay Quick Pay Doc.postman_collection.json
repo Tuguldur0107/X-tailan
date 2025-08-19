@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "5b68ca4b-ea18-4f67-a107-eb8083a447d6",
+		"name": "Qpay Quick Pay Doc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "123456",
+								"username": "TEST_VENDOR_MERCHANT"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"terminal_id\": \"95000059\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://sandbox-quickqr.qpay.mn/v2/auth/token"
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUwOTUzMzRhLTY4ODctNDBjNC05MGQ1LTVmYzg1MjVlZDFkYyIsInNlc3Npb25fc2VjcmV0IjoiJDJiJDEwJGVWSENDR1VHd3FRc3NLWWlWOW5HRS5BYTBPRllIZXo2emMucU5iTDd3TVVaaE9tdWZtRXd1IiwiZXh0cmEiOnsidGVybWluYWxfaWQiOiI5NTAwMDA1OSJ9LCJpYXQiOjE2NTExMzI1OTUsImV4cCI6MzMwMjM2NTk5MH0.ysNSnB9evVHCLC8NzrC97Oq-E9qzTJg3RN0qBNgUgUk"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_qpay_pprocess_v2}}{{port_qpay_pprocess_v2}}/v2/auth/refresh"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "merchant",
+			"item": [
+				{
+					"name": "create_company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"owner_register_no\": \"11115555\",\n    \"owner_first_name\": \"Наран\",\n    \"owner_last_name\": \"Бат\",\n    \"location_lat\": \"47.9184676\",\n    \"location_lng\": \"106.9177016\",\n    \"register_number\": \"1235678\",\n    \"name\": \"Батхүлэг\",\n    \"mcc_code\": \"0110\",\n    \"city\": \"Ulaanbaatar\",\n    \"district\": \"Sukhbaatar\",\n    \"address\": \"6 хороо 14-10\",\n    \"phone\": \"9999999\",\n    \"email\": \"bat@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://sandbox-quickqr.qpay.mn/v2/merchant/company"
+					},
+					"response": []
+				},
+				{
+					"name": "create_person",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"register_number\": \"5120163\",\n    \"last_name\": \"Бат\",\n    \"first_name\": \"Наран\",\n    \"mcc_code\": \"0110\",\n    \"city\": \"Ulaanbaatar\",\n    \"district\": \"Sukhbaatar\",\n    \"address\": \"6 хороо 14-10\",\n    \"phone\": \"8888888\",\n    \"email\": \"bat@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_qpay_pprocess_v2}}{{port_qpay_pprocess_v2}}/v2/merchant/person"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 100000,\n  \"customer_name\": \"TDB\",\n  \"customer_logo\": \"\",\n  \"bank_accounts\": [\n    {\n      \"default\": true,\n      \"account_bank_code\": \"040000\",\n      \"account_number\": \"490000869\",\n      \"account_name\": \"test account2\",\n      \"is_default\": true\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_qpay_pprocess_v2}}{{port_qpay_pprocess_v2}}/v2/merchant/aa434de0-a839-4254-b46d-1652fc964b7d"
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"register_number\": null,\n    \"offset\": {\n        \"page_number\": 1,\n        \"page_limit\": 10\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://sandbox-quickqr.qpay.mn/v2/merchant/list"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "invoice",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"merchant_id\": \"8e85aaa9-aebb-43d4-ad24-f942215deffb\",\n    \"branch_code\": \"BRANCH_001\", \n    \"amount\": 100,\n    \"currency\": \"MNT\",\n    \"customer_name\": \"TDB\",\n    \"customer_logo\": \"\",\n    \"callback_url\": \"https://notify@test.mn/pay\",\n    \"description\": \"9 сарын үйлчилгээний төлбөр\",\n    \"mcc_code\": \"\",\n    \"bank_accounts\": [\n        {\n            \"default\": true,\n            \"account_bank_code\": \"040000\",\n            \"account_number\": \"490000869\",\n            \"account_name\": \"test account2\",\n            \"is_default\": true\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_qpay_pprocess_v2}}{{port_qpay_pprocess_v2}}/v2/invoice"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 100000,\n  \"customer_name\": \"TDB\",\n  \"customer_logo\": \"\",\n  \"bank_accounts\": [\n    {\n      \"default\": true,\n      \"account_bank_code\": \"040000\",\n      \"account_number\": \"490000869\",\n      \"account_name\": \"test account2\",\n      \"is_default\": true\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_qpay_pprocess_v2}}{{port_qpay_pprocess_v2}}/v2/invoice/13a31968-bcd9-46dc-8f73-dd43d8b9e96c"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "check",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"invoice_id\": \"13a31968-bcd9-46dc-8f73-dd43d8b9e96c\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_qpay_pprocess_v2}}{{port_qpay_pprocess_v2}}/v2/payment/check"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJmN2RiZmQ2MS1iNzQ1LTQxZGMtYTNlNS1jNmViNDExMzkwNzMiLCJzZXNzaW9uX2lkIjoidG9ad2VsT05GcFk2UU84a3QyMW51ZjZrZ3htZ2RDLTEiLCJ0ZXJtaW5hbF9pZCI6Ijk1MDAwMDU5IiwiaWF0IjoxNjk0NjczMTEyLCJleHAiOjMzODk0MzI2MjR9.IAJIhNvyxrqrTd6NoKCqvMgYQsYxygUDQ-LgNerWyPs"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

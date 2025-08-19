@@ -1,0 +1,45 @@
+Message actions  HTMLText   Reply to sender Reply to list or to sender and all recipients Forward the message   Open in new window
+Subject:Тестийн орчинд холболтын мэдээлэл үүсгэн илгээж байна.
+Contact photo
+From	Sales Team	Date	Today 09:48
+Attachments
+mcc (1).xlsx
+(~16 KB)
+Options
+Qpay Quick Pay Doc.postman_collection.json
+(~7 KB)
+Options
+Message Body
+
+Domain: https://sandbox-quickqr.qpay.mn
+
+Token
+
+Username: TEST_VENDOR_MERCHANT
+
+Password: 123456
+
+Document: https://documenter.getpostman.com/view/1550773/2s8YekSaaV
+
+
+
+ Хүндэтгэсэн,
+
+ O.Khaliun
+
+ Sales Team, ККТТ LLC
+
+
+
+[/Users/nomio/Library/Containers/com.microsoft.Outlook/Data/Library/Caches/Signatures/signature_1172007128]
+
+[signature_1824503675]  Mongolia, Ulaanbaatar City, Sukhbaatar District,
+        1st khoroo, Embassy Street, Shuren Office, unit 6
+
+[signature_1666032866]   (+976) 76102211-2
+
+[signature_1774616488]  www.qpay.mn<http://www.qpay.mn/>
+
+[signature_1738198330]
+
+АНХААРУУЛГА: Энэхүү цахим шуудан, түүний агуулга нь “ККТТ  ХХК”-ийн өмч бөгөөд зөвхөн зориулж илгээсэн этгээд болон албан байгууллага ашиглах эрхтэй болно. Энэхүү цахим шуудан нь тусгай эрх бүхий этгээдэд зориулагдсан тул бусдад дамжуулсан тохиолдолд байгууллагын нууц задруулсан гэж үзэн хуулийн хариуцлага хүлээлгэх үндэслэл болохыг анхаарна уу. Хэрвээ та энэхүү цахим шуудангийн зорилтот хүлээн авагч бус бөгөөд энэхүү захидлыг зохих зөвшөөрөл авалгүйгээр танд илгээсэн болох нь илэрхий харагдаж буй тохиолдолд агуулагдаж буй мэдээллийг ямар нэг байдлаар бусдад түгээхийг хатуу хориглоно. Хэрэв энэхүү цахим шууданг эндүүрэл гарсны улмаас хүлээн авсан бол ККТТ ХХК info@qpay.mn, 76102211<mailto:info@qpay.mn,%2076102211>  хаягаар мэдэгдэх эсвэл илгээсэн этгээд рүү нэн даруй хариу илгээн мэдэгдэж, энэхүү цахим шууданг өөрийн системээс даруй устгана уу.
