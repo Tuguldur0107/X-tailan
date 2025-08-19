@@ -1,0 +1,47 @@
+📄 2. Системийн архитектур ба компонентууд
+Архитектур схем:
+
+markdown
+Код хуулах
+Facebook Bot ↔ Backend API ↔ eTax API
+                     ↕
+         PostgreSQL (Railway)
+                     ↕
+     Web Admin Panel + Landing
+Гол бүрэлдэхүүнүүд:
+
+Facebook Bot
+
+Хэрэглэгчтэй харилцах
+
+Компанийн бүртгэл, тайлангийн жагсаалт
+
+Тайлан илгээх команд /submit_x
+
+Backend (Node.js + Express)
+
+eTax authentication: access token авах
+
+Тайлангийн жагсаалт авах
+
+Тайлан илгээх (POST /submitX)
+
+QPay API холбоо (invoice, webhook)
+
+PostgreSQL (Railway)
+
+User
+
+Company
+
+Report
+
+Token
+
+Payment
+
+Web Admin Panel
+
+Admin log, статистик харах
+
+Гар аргаар тайлан илгээх UI (internal)
