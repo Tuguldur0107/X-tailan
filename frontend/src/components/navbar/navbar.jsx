@@ -9,7 +9,7 @@ export default function Navbar() {
 
   return (
     <HStack py={3}>
-      <Heading size="md" cursor="pointer" onClick={() => nav("/")}>X‑тайлан</Heading>
+      <Heading size="md" cursor="pointer" onClick={() => nav("/")}>X‑Sender</Heading>
       <Spacer />
       <HStack>
         <IconButton

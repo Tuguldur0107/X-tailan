@@ -1,3 +1,4 @@
+// src/landingPage/LandingPage.jsx
 import React from "react";
 import {
   Box,
@@ -9,6 +10,7 @@ import {
   VStack,
   SimpleGrid,
   useColorModeValue,
+  usePrefersReducedMotion,
   Divider,
   Badge,
   Icon,
@@ -18,6 +20,9 @@ import {
   Wrap,
   WrapItem,
   Tag,
+  Stack,
+  Center,
+  Kbd,
 } from "@chakra-ui/react";
 import {
   ArrowRight,
@@ -29,112 +34,106 @@ import {
   Cloud,
   Server,
   Check,
+  Cpu,
+  Palette,
+  Route,
+  CloudCog,
+  Rocket,
+  Shield,
+  CreditCard,
 } from "lucide-react";
-import Navbar from "../components/navbar/navbar";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/navbar/navbar";
+import MotionBox from "../components/MotionBox/MotionBox";
 
-/** Reusable card-style feature */
-function Feature({ icon, title, desc }) {
-  const cardBg = useColorModeValue("white", "whiteAlpha.50");
-  const border = useColorModeValue("gray.200", "whiteAlpha.200");
-  const text = useColorModeValue("gray.700", "gray.300");
+// ---------- Small building blocks ----------
+function Tile({ children, as = "div", hover = true, ...rest }) {
+  const cardBg = useColorModeValue("bg.card", "bg.card");
+  const border = useColorModeValue("border.base", "border.base");
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   return (
-    <VStack
-      align="start"
-      p={6}
-      rounded="xl"
-      borderWidth="1px"
-      spacing={2}
-      borderColor={border}
+    <MotionBox
+      as={as}
       bg={cardBg}
+      borderWidth="1px"
+      borderColor={border}
+      rounded="2xl"
+      p={{ base: 4, md: 5 }}
+      shadow="elevated"
+      position="relative"
+      whileHover={hover && !prefersReducedMotion ? { y: -4, scale: 1.01 } : undefined}
+      transition={{ type: "spring", stiffness: 180, damping: 18 }}
+      _before={{
+        content: '""',
+        position: "absolute",
+        inset: 0,
+        rounded: "2xl",
+        padding: "1px",
+        bgGradient: "linear(to-br, brand.500, brand.300)",
+        opacity: 0,
+        transition: "opacity .2s ease",
+        WebkitMask:
+          "linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)",
+        WebkitMaskComposite: "xor",
+        pointerEvents: "none",
+      }}
+      _hover={{ _before: { opacity: 0.7 } }}
+      {...rest}
     >
-      <HStack>
-        <Icon as={icon} />
+      {children}
+    </MotionBox>
+  );
+}
+
+function IconTitle({ icon: I, title, right }) {
+  return (
+    <HStack align="center" justify="space-between" mb={1}>
+      <HStack spacing={2}>
+        {I && (
+          <Center
+            w="38px"
+            h="38px"
+            rounded="xl"
+            borderWidth="1px"
+            borderColor="border.base"
+          >
+            <Icon as={I} boxSize={5} />
+          </Center>
+        )}
         <Heading size="sm">{title}</Heading>
       </HStack>
-      <Text fontSize="sm" color={text}>{desc}</Text>
-    </VStack>
+      {right}
+    </HStack>
   );
 }
 
-/** Tile for emoji steps (to keep hooks at top-level of a component) */
-function StepTile({ emoji, title, desc }) {
-  const cardBg = useColorModeValue("white", "whiteAlpha.50");
-  const border = useColorModeValue("gray.200", "whiteAlpha.200");
-  const text = useColorModeValue("gray.700", "gray.300");
-  return (
-    <VStack
-      align="start"
-      p={6}
-      bg={cardBg}
-      borderWidth="1px"
-      borderColor={border}
-      rounded="xl"
-      shadow="sm"
-    >
-      <Text fontSize="3xl">{emoji}</Text>
-      <Heading size="md">{title}</Heading>
-      <Text color={text}>{desc}</Text>
-    </VStack>
-  );
-}
-
-/** Numbered timeline item */
-function StepLine({ index, title, desc }) {
-  const cardBg = useColorModeValue("white", "whiteAlpha.100");
-  const border = useColorModeValue("gray.200", "whiteAlpha.200");
-  const text = useColorModeValue("gray.700", "gray.300");
-  return (
-    <GridItem
-      p={6}
-      bg={cardBg}
-      borderLeftWidth="4px"
-      borderLeftColor="brand.500"
-      borderWidth="1px"
-      borderColor={border}
-      rounded="xl"
-      shadow="sm"
-      position="relative"
-      pl={14}
-    >
-      <Box
-        position="absolute"
-        left={4}
-        top={6}
-        w={10}
-        h={10}
-        rounded="full"
-        bg="brand.600"
-        color="white"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        fontWeight="bold"
-        shadow="md"
-      >
-        {index}
-      </Box>
-      <Heading size="md" mb={1}>{title}</Heading>
-      <Text color={text}>{desc}</Text>
-    </GridItem>
-  );
-}
-
+// ---------- Page ----------
 export default function LandingPage() {
   const nav = useNavigate();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Top-level color values (safe for hooks)
-  const bg = useColorModeValue("gray.50", "gray.900");
-  const cardBgMain = useColorModeValue("white", "whiteAlpha.100");
-  const borderMain = useColorModeValue("gray.200", "whiteAlpha.200");
-  const muted = useColorModeValue("gray.700", "gray.300");
+  const pageBg     = useColorModeValue("bg.page", "bg.page");
+  const muted      = useColorModeValue("fg.muted", "fg.muted");
+  const border     = useColorModeValue("border.base", "border.base");
+  const ringBorder = useColorModeValue("brand.200", "whiteAlpha.400");
 
-  const stepTiles = [
-    { title: "Нэвтрэх", desc: "Messenger чатботоор өөрийн eTax аккаунтаар нэг удаа нэвтэрнэ.", emoji: "🔑" },
-    { title: "Компанийн сонголт", desc: "Олон компанитай бол аль компанийг автоматаар удирдуулахыг сонгоно.", emoji: "🏢" },
-    { title: "Тайлангийн жагсаалт", desc: "Систем танай компанийн тайлангийн төлөвийг автоматаар хянаж байдаг.", emoji: "📋" },
-    { title: "Автомат илгээх", desc: "Хуулийн хугацаанд таны өмнөөс тайланг автоматаар илгээнэ.", emoji: "🚀" },
-    { title: "Мэдэгдэл", desc: "Амжилттай илгээгдсэнийг Facebook Messenger-р шууд мэдэгдэнэ.", emoji: "📩" },
+  // gradient variables (text)
+  const gradMain = useColorModeValue(
+    "linear(to-r, brand.400, brand.700)",
+    "linear(to-r, brand.300, brand.500)"
+  );
+  const gradSub = useColorModeValue(
+    "linear(to-r, brand.300, brand.600)",
+    "linear(to-r, brand.400, brand.500)"
+  );
+
+  // Content
+  const securityItems = [
+    { icon: Lock,        title: "Нууц үг хадгалахгүй",    desc: "eTax нууц үгийг хадгалдаггүй, токеныг түр хугацаанд шифрлэж ашиглана." },
+    { icon: ShieldCheck, title: "AES-256 шифрлэлт",       desc: "etax нэр, ent_id зэрэг эмзэг өгөгдлийг PostgreSQL дээр AES-256-аар шифрлэнэ." },
+    { icon: ShieldCheck, title: "Нэвтрэлтийн хамгаалалт", desc: "Rate limit, 2FA, reCAPTCHA зэрэг хамгаалалтыг шат дараатай нэвтрүүлнэ." },
+    { icon: Check,       title: "Нууцлалын шалгалт",      desc: "Эмзэг байдлын скан, pen-test, Privacy Policy хэрэгжүүлэлт." },
   ];
 
   const stepLines = [
@@ -146,133 +145,256 @@ export default function LandingPage() {
   ];
 
   return (
-    <Box minH="100dvh" bg={bg}>
-      <Container maxW="6xl">
-        {/* Top nav */}
+    <Box bg={pageBg} minH="100dvh">
+      <Container maxW="7xl" px={{ base: 4, md: 8 }}>
         <Navbar />
 
-        {/* Hero */}
-        <VStack pt={{ base: 10, md: 20 }} pb={{ base: 10, md: 16 }} spacing={6} textAlign="center">
-          <Heading size={{ base: "xl", md: "2xl" }} lineHeight={1.2}>
-            X тайлангаа март,
-            <br />
-            <Text as="span" color="brand.400">X-SENDER-ийг ажиллуул</Text>
-          </Heading>
-          <Text fontSize={{ base: "md", md: "lg" }} maxW="760px">
-            Таны өмнөөс X тайланг хуулийн хугацаанд автоматаар илгээнэ
-          </Text>
+        {/* HERO: Mosaic */}
+        <Stack direction={{ base: "column", lg: "row" }} spacing={6} pt={{ base: 8, md: 12 }} pb={{ base: 8, md: 10 }}>
+          <Grid templateColumns={{ base: "repeat(6, 1fr)", lg: "repeat(8, 1fr)" }} gap={4} flex="1">
+            <GridItem colSpan={{ base: 3, lg: 2 }}>
+              <Tile>
+                <IconTitle icon={Rocket} title="Автомат ажиллагаа" />
+                <Text color={muted} fontSize="sm">Тайланг хугацаанд нь <Kbd>auto</Kbd> илгээж, алдааг бууруулна.</Text>
+              </Tile>
+            </GridItem>
+            <GridItem colSpan={{ base: 3, lg: 2 }}>
+              <Tile>
+                <IconTitle icon={Shield} title="Хамгаалалт" />
+                <Text color={muted} fontSize="sm">AES-256 шифрлэлт, 2FA, rate limit.</Text>
+              </Tile>
+            </GridItem>
+            <GridItem colSpan={{ base: 3, lg: 2 }}>
+              <Tile>
+                <IconTitle icon={CloudCog} title="Cloud дэд бүтэц" />
+                <Text color={muted} fontSize="sm">Railway клауд, тасралтгүй ажиллагаа.</Text>
+              </Tile>
+            </GridItem>
+            <GridItem colSpan={{ base: 3, lg: 2 }}>
+              <Tile>
+                <IconTitle icon={CreditCard} title="QPay төлбөр" />
+                <Text color={muted} fontSize="sm">Хялбар, аюулгүй цэнэглэлт.</Text>
+              </Tile>
+            </GridItem>
 
-          <HStack>
-            <Button size="lg" colorScheme="brand" rightIcon={<ArrowRight size={18} />} onClick={() => nav("/login")}>
-              Системд нэвтрэх
-            </Button>
-            <Button
-              size="lg"
-              variant={useColorModeValue("outline", "solid")}
-              leftIcon={<Facebook size={18} />}
-              onClick={() => window.open("https://www.facebook.com/profile.php?id=61578621497518", "_blank")}
-            >
-              Facebook Page
-            </Button>
-          </HStack>
-        </VStack>
+            {/* Center board */}
+            <GridItem colSpan={{ base: 6, lg: 8 }}>
+              <Tile p={{ base: 5, md: 8 }} hover={false}>
+                <VStack spacing={4}>
+                  <Heading size={{ base: "lg", md: "xl" }} textAlign="center" lineHeight={1.2}>
+                    X тайлангаа март,{" "}
+                    <Text as="span" bgClip="text" bgGradient={gradMain}>
+                      X-SENDER-ийг ажиллуул
+                    </Text>
+                  </Heading>
+                  <Text textAlign="center" bgGradient={gradSub} bgClip="text" maxW="3xl">
+                    Таны өмнөөс X тайланг хуулийн хугацаанд автоматаар илгээнэ
+                  </Text>
+                  <HStack spacing={3} wrap="wrap" justify="center">
+                    <Button size="lg" colorScheme="brand" rightIcon={<ArrowRight size={18} />} onClick={() => nav("/login")}>
+                      Системд нэвтрэх
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant={useColorModeValue("outline", "solid")}
+                      leftIcon={<Facebook size={18} />}
+                      onClick={() => window.open("https://www.facebook.com/profile.php?id=61578621497518","_blank")}
+                    >
+                      Facebook Page
+                    </Button>
+                  </HStack>
+                  <Wrap justify="center" spacing={3} pt={2}>
+                    {["React 18","Chakra UI","React Router v7","Axios","Framer Motion","Lucide Icons","Railway Cloud","eTax API"].map((t) => (
+                      <WrapItem key={t}>
+                        <Tag
+                          rounded="full"
+                          px={4}
+                          py={2}
+                          variant="subtle"
+                          colorScheme="blue"
+                          transition="all .2s"
+                          _hover={{
+                            transform: prefersReducedMotion ? undefined : "translateY(-2px)",
+                            boxShadow: prefersReducedMotion ? undefined : "0 10px 20px rgba(99,102,241,.18)",
+                          }}
+                        >
+                          {t}
+                        </Tag>
+                      </WrapItem>
+                    ))}
+                  </Wrap>
+                </VStack>
+              </Tile>
+            </GridItem>
 
-        {/* About */}
-        <Box bg={cardBgMain} borderWidth="1px" borderColor={borderMain} p={{ base: 6, md: 10 }} rounded="2xl" shadow="md" mb={16}>
-          <Heading size="lg" textAlign="center" mb={4}>X-SENDER гэж юу вэ?</Heading>
-          <Text fontSize="lg" color={muted}>
-            <Text as="span" fontWeight="semibold" color="brand.500">X-SENDER</Text> нь Монголын ААН-уудын Х тайланг{" "}
-            <Text as="span" fontWeight="semibold">албан ёсны eTax API</Text> ашиглан автоматаар, алдаагүй, хугацаанд нь илгээх платформ.
-            Messenger chatbot + Web App хосолсон интерфейсээр хэрэглэгчид энгийн, хурдан, найдвартай үйлчилгээ авна.
-          </Text>
-        </Box>
-
-        {/* How it works – tiles */}
-        <Box mb={16}>
-          <Heading size="lg" textAlign="center" mb={8}>Хэрхэн ажилладаг вэ?</Heading>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
-            {stepTiles.map((s, i) => <StepTile key={i} {...s} />)}
-          </SimpleGrid>
-        </Box>
-
-        {/* How it works – numbered timeline */}
-        <Box mb={16}>
-          <Grid templateColumns={{ base: "1fr", md: "1fr" }} gap={6}>
-            {["Нэвтрэх","Компанийн сонголт","Тайлангийн жагсаалт","Автомат илгээх","Мэдэгдэл"]
-              .map((title, idx) => (
-                <StepLine key={idx} index={idx + 1} title={title} desc={stepLines[idx]} />
-            ))}
+            {/* Bottom small tiles */}
+            <GridItem colSpan={{ base: 3, lg: 2 }}>
+              <Tile><IconTitle icon={Cpu} title="React 18" /><Text color={muted} fontSize="sm">Concurrent, StrictMode.</Text></Tile>
+            </GridItem>
+            <GridItem colSpan={{ base: 3, lg: 2 }}>
+              <Tile><IconTitle icon={Palette} title="Chakra UI" /><Text color={muted} fontSize="sm">Theme-тэй, responsive.</Text></Tile>
+            </GridItem>
+            <GridItem colSpan={{ base: 3, lg: 2 }}>
+              <Tile><IconTitle icon={Route} title="React Router v7" /><Text color={muted} fontSize="sm">Route tree, lazy.</Text></Tile>
+            </GridItem>
+            <GridItem colSpan={{ base: 3, lg: 2 }}>
+              <Tile><IconTitle icon={Cloud} title="Axios" /><Text color={muted} fontSize="sm">Interceptors, retry.</Text></Tile>
+            </GridItem>
           </Grid>
-        </Box>
+        </Stack>
 
-        {/* Value props */}
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={5} mb={16}>
-          <Feature icon={Zap} title="Хурдтай" desc="Процессийг автоматжуулж, 1–2 минутанд бэлэн болгоно." />
-          <Feature icon={ShieldCheck} title="Найдвартай" desc="Алдааны менежмент, баталгаажуулалттай." />
-          <Feature icon={BarChart3} title="Өргөтгөх боломжтой" desc="Дараа нь бусад тайлан, нэгжүүдийг холбох архитектур." />
+        {/* ABOUT */}
+        <Tile as={Box} p={{ base: 6, md: 8 }} mb={10}>
+          <Heading size="lg" textAlign="center" mb={3} bgGradient={gradMain} bgClip="text">
+            X-SENDER гэж юу вэ?
+          </Heading>
+          <Text fontSize="lg" color={muted} textAlign="center" maxW="4xl" mx="auto">
+            <Text as="span" fontWeight="semibold" color="brand.500">X-SENDER</Text>{" "}
+            нь Монголын ААН-уудын Х тайланг <Text as="span" fontWeight="semibold">албан ёсны eTax API</Text>{" "}
+            ашиглан автоматаар, алдаагүй, хугацаанд нь илгээх платформ. Messenger chatbot + Web App хосолсон интерфейсээр
+            хэрэглэгчид энгийн, хурдан, найдвартай үйлчилгээ авна.
+          </Text>
+        </Tile>
+
+        {/* NEW: LEFT How it works + RIGHT Pricing */}
+        <Grid templateColumns={{ base: "1fr", lg: "1fr 420px" }} gap={6} alignItems="start" mb={12}>
+          {/* LEFT: How it works */}
+          <Box>
+            <Heading size="lg" mb={4} bgGradient={gradMain} bgClip="text">
+              Хэрхэн ажилладаг вэ?
+            </Heading>
+            <VStack spacing={4} align="stretch">
+              {["Нэвтрэх","Компанийн сонголт","Тайлангийн жагсаалт","Автомат илгээх","Мэдэгдэл"].map((title, idx) => (
+                <Tile key={idx} p={6} position="relative">
+                  <Box
+                    position="absolute"
+                    left={4}
+                    top={4}
+                    w="42px"
+                    h="42px"
+                    rounded="full"
+                    bgGradient="linear(to-br, brand.500, brand.700)"
+                    color="white"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    fontWeight="bold"
+                    fontSize="md"
+                    boxShadow="0 8px 16px rgba(99,102,241,.35)"
+                    _after={{
+                      content: '""',
+                      position: "absolute",
+                      inset: "-4px",
+                      rounded: "full",
+                      border: "2px solid",
+                      borderColor: ringBorder,
+                    }}
+                  >
+                    {idx + 1}
+                  </Box>
+                  <VStack align="start" pl="60px" spacing={1}>
+                    <Heading size="md">{title}</Heading>
+                    {/* desc text as gradient */}
+                    <Text bgGradient={gradSub} bgClip="text">{stepLines[idx]}</Text>
+                  </VStack>
+                </Tile>
+              ))}
+            </VStack>
+          </Box>
+
+          {/* RIGHT: Pricing */}
+          <Box>
+            <Heading size="lg" mb={4} textAlign="left" bgGradient={gradMain} bgClip="text">
+              💳 Үнэ төлбөр
+            </Heading>
+            <Tile as={Box} p={{ base: 6, md: 8 }}>
+              <HStack justify="space-between" mb={3}>
+                <Heading size="md" color="brand.600">Стандарт</Heading>
+                <Badge colorScheme="brand" variant="subtle" rounded="full" px={3}>
+                  Хамгийн их ашиглагддаг
+                </Badge>
+              </HStack>
+
+              <HStack align="baseline" spacing={2} mb={2} justify="center">
+                <Heading size="2xl" lineHeight={1} bgGradient={gradMain} bgClip="text">
+                  5,000₮
+                </Heading>
+                <Text opacity={0.85}>/ тайлан</Text>
+              </HStack>
+
+              <Text color={muted} mb={4}>Дараах нөхцөлтэйгээр энгийн, ойлгомжтой тариф.</Text>
+
+              <VStack align="start" spacing={3} color={muted}>
+                <HStack><Icon as={Check} color="green.500" /><Text>Эхний 3 тайлан үнэгүй — шинээр бүртгүүлсэнд автоматаар</Text></HStack>
+                <HStack><Icon as={Check} color="green.500" /><Text>Цэнэглэх дүн: <b>50,000₮</b> (10 тайлангийн эрх)</Text></HStack>
+                <HStack><Icon as={Check} color="green.500" /><Text>Уян хатан зарцуулалт — тайлан бүрт 5,000₮ суутна</Text></HStack>
+                <HStack><Icon as={Check} color="green.500" /><Text>QPay-ээр аюулгүй төлбөр тооцоо</Text></HStack>
+              </VStack>
+
+              <Button
+                mt={6}
+                size="md"
+                colorScheme="brand"
+                leftIcon={<Icon as={Check} />}
+                w="full"
+                onClick={() => nav("/payment")}
+                transition="all .2s"
+                _hover={{ transform: prefersReducedMotion ? undefined : "translateY(-2px)" }}
+              >
+                QPay-ээр цэнэглэх
+              </Button>
+            </Tile>
+          </Box>
+        </Grid>
+
+        {/* VALUE PROPS */}
+        <Heading size="lg" mb={4} bgGradient={gradMain} bgClip="text">Яагаад X-SENDER?</Heading>
+        <SimpleGrid columns={{ base: 1, md: 3 }} gap={4} mb={12}>
+          {[
+            { icon: Zap,          title: "Хурдтай",            desc: "Процессийг автоматжуулж, 1–2 минутанд бэлэн болгоно." },
+            { icon: ShieldCheck,  title: "Найдвартай",         desc: "Алдааны менежмент, баталгаажуулалттай." },
+            { icon: BarChart3,    title: "Өргөтгөх боломжтой", desc: "Дараа нь бусад тайлан, нэгжүүдийг холбох архитектур." },
+          ].map((f, i) => (
+            <Tile key={i}><IconTitle icon={f.icon} title={f.title} /><Text color={muted}>{f.desc}</Text></Tile>
+          ))}
         </SimpleGrid>
 
-        {/* Pricing */}
-        <Box bg={cardBgMain} borderWidth="1px" borderColor={borderMain} rounded="2xl" shadow="lg" p={{ base: 6, md: 10 }} mb={16}>
-          <Heading size="lg" textAlign="center" mb={3}>Үнэ төлбөр</Heading>
-          <Text textAlign="center" color={muted} mb={8}>
-            X тайланг алдаагүй, автоматаар илгээх ухаалаг үйлчилгээг хямд үнээр ашиглаарай.
-          </Text>
+        {/* SECURITY */}
+        <Heading size="lg" mb={4} bgGradient={gradMain} bgClip="text">🔒 Аюулгүй байдал</Heading>
+        <SimpleGrid columns={{ base: 1, md: 2 }} gap={4} mb={12}>
+          {securityItems.map((f, i) => (
+            <Tile key={i}>
+              <HStack mb={2} spacing={3}><Icon as={f.icon} boxSize={6} /><Heading size="md">{f.title}</Heading></HStack>
+              <Text color={muted}>{f.desc}</Text>
+            </Tile>
+          ))}
+        </SimpleGrid>
 
-          <Box maxW="2xl" mx="auto" p={8} bg={useColorModeValue("white", "whiteAlpha.50")} borderWidth="1px"
-               borderColor={borderMain} rounded="2xl" shadow="md">
-            <Heading size="md" color="brand.600" mb={4}>5,000₮ / тайлан</Heading>
-            <VStack align="start" spacing={4} color={muted}>
-              <Text><Text as="span" color="green.600" fontWeight="semibold">✅ Эхний 3 тайлан үнэгүй:</Text> Шинээр бүртгүүлсэн хэрэглэгчид автоматаар нээгдэнэ.</Text>
-              <Text><Text as="span" color="blue.600" fontWeight="semibold">💳 Цэнэглэх дүн:</Text> Хамгийн багадаа <b>50,000₮</b> буюу 10 тайлангийн эрхээр QPay-р цэнэглэнэ.</Text>
-              <Text><Text as="span" color="purple.600" fontWeight="semibold">📊 Уян хатан зарцуулалт:</Text> Тайлан бүрт 5,000₮ хасагдаж, үлдэгдэл тань кредит хэлбэрээр хадгалагдана.</Text>
-            </VStack>
-            <Button mt={8} size="md" colorScheme="brand" leftIcon={<Icon as={Check} />} onClick={() => nav("/payment")}>
-              QPay-ээр цэнэглэх
-            </Button>
-          </Box>
-        </Box>
+        {/* TECHNOLOGY */}
+        <Heading size="lg" mb={2} bgGradient={gradMain} bgClip="text">🚀 Технологийн шийдэл</Heading>
+        <Text fontSize="lg" mb={8} color={muted} maxW="700px">
+          X-SENDER нь eTax системтэй албан ёсны API-р шууд холбогдож, найдвартай клауд дэд бүтэц дээр ажилладаг.
+          Орчин үеийн технологиудыг ашиглан хурдтай, найдвартай, өргөтгөх боломжтой шийдлийг санал болгож байна.
+        </Text>
+        <SimpleGrid columns={{ base: 1, md: 2 }} gap={4} mb={6}>
+          {[
+            { icon: Cloud,        title: "Cloud дэд бүтэц",     desc: "Railway клауд дээр байршуулсан, тасралтгүй ажиллагаатай, scale-д бэлэн орчин." },
+            { icon: Server,       title: "Сүүлийн үеийн фреймворк", desc: "React 18, Chakra UI, React Router v7, Axios, Framer Motion." },
+            { icon: ShieldCheck,  title: "Хамгаалалт",          desc: "Нууцлал, AES-256 шифрлэлт, CI/CD, логжуулалт, мониторинг." },
+            { icon: Rocket,       title: "Автомат ажиллагаа",  desc: "Оролцоогүйгээр урсгалыг автоматжуулж, алдаагүй тайлан илгээнэ." },
+          ].map((f, i) => (
+            <Tile key={i}><IconTitle icon={f.icon} title={f.title} /><Text color={muted}>{f.desc}</Text></Tile>
+          ))}
+        </SimpleGrid>
 
-        {/* Security */}
-        <Box mb={16}>
-          <Heading size="lg" textAlign="center" mb={8}>Аюулгүй байдал</Heading>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
-            <Feature icon={Lock} title="Нууц үг хадгалахгүй" desc="eTax нууц үгийг хадгалдаггүй, токеныг түр хугацаанд шифрлэж ашиглана." />
-            <Feature icon={ShieldCheck} title="AES-256 шифрлэлт" desc="etax нэр, ent_id зэрэг эмзэг өгөгдлийг PostgreSQL дээр AES-256-аар шифрлэнэ." />
-            <Feature icon={ShieldCheck} title="Нэвтрэлтийн хамгаалалт" desc="Rate limit, 2FA, reCAPTCHA зэрэг хамгаалалтыг шат дараатай нэвтрүүлнэ." />
-            <Feature icon={Check} title="Нууцлалын шалгалт" desc="Эмзэг байдлын скан, pen-test, Privacy Policy хэрэгжүүлэлт." />
-          </SimpleGrid>
-        </Box>
-
-        {/* Technology */}
-        <Box mb={20}>
-          <Heading size="lg" textAlign="center" mb={4}>Технологийн шийдэл</Heading>
-          <Text textAlign="center" mb={10} color={muted}>
-            eTax системтэй албан ёсны API-р холбогдож, клауд дэд бүтэц дээр найдвартай ажиллана.
-          </Text>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={6}>
-            <Feature icon={Zap} title="Автомат ажиллагаа" desc="Таны оролцоогүйгээр бүх урсгалыг гүйцэтгэнэ." />
-            <Feature icon={Cloud} title="Cloud дэд бүтэц" desc="Railway клауд дээр тасралтгүй ажиллагаатай." />
-            <Feature icon={Server} title="Сүүлийн үеийн фреймворк" desc="Node.js, NestJS, Next.js зэрэг технологиуд." />
-            <Feature icon={ShieldCheck} title="Хамгаалалт" desc="Нууцлал, шифрлэлт, CI/CD, логжуулалт бүрэн." />
-          </SimpleGrid>
-
-          <Wrap justify="center" spacing={3}>
-            {["Next.js","NestJS","Node.js","PostgreSQL","Docker","Railway","ManyChat","QPay API","eTax API"].map((t) => (
-              <WrapItem key={t}><Tag size="md" colorScheme="blue" variant="subtle">{t}</Tag></WrapItem>
-            ))}
-          </Wrap>
-        </Box>
-
-        {/* Footer */}
+        {/* FOOTER */}
         <VStack as="footer" py={10} spacing={2} opacity={0.9}>
           <Divider />
           <HStack>
-            <Heading size="sm">X-тайлан</Heading>
+            <Heading size="sm">X-Sender</Heading>
             <Badge colorScheme="brand">beta</Badge>
           </HStack>
-          <Text fontSize="sm">© {new Date().getFullYear()} X-тайлан — UFE Tech / IO Institute</Text>
-          <CLink href="mailto:contact@example.com" fontSize="sm">contact@example.com</CLink>
+          <CLink href="mailto:hello@x-sender.mn" fontSize="sm">hello@x-sender.mn</CLink>
         </VStack>
       </Container>
     </Box>
