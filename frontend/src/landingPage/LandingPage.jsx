@@ -3,12 +3,12 @@ import React from "react";
 import {
   Box, Container, Heading, Text, Button, HStack, VStack, SimpleGrid,
   useColorModeValue, usePrefersReducedMotion, Divider, Badge, Icon,
-  Link as CLink, Grid, GridItem, Wrap, WrapItem, Tag, Stack, Center, Kbd,
+  Link as CLink, Grid, GridItem, Stack, Center, Kbd,
   Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon,
   Slider, SliderTrack, SliderFilledTrack, SliderThumb,
 } from "@chakra-ui/react";
 import {
-  ArrowRight, Facebook, BarChart3, ShieldCheck, Zap, Lock, Cloud, Server, Check,
+  ArrowRight, Facebook, ShieldCheck, Lock, Cloud, Check,
   Cpu, Palette, Route, CloudCog, Rocket, Shield, CreditCard,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -85,7 +85,6 @@ export default function LandingPage() {
 
   const pageBg     = useColorModeValue("bg.page", "bg.page");
   const muted      = useColorModeValue("fg.muted", "fg.muted");
-  const border     = useColorModeValue("border.base", "border.base");
   const ringBorder = useColorModeValue("brand.200", "whiteAlpha.400");
 
   // 🌈 илүү өнгөлөг солонгорсон градиентууд
