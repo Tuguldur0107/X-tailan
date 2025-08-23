@@ -1,5 +1,5 @@
 import { Box, Container, VStack, Heading, Text, HStack, Button, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
-import Navbar from "../components/navbar/Navbar";
+import Navbar from '../../components/navbar/navbar';
 import { ArrowRight, Facebook, BarChart3 } from "lucide-react";
 
 function Feature({ icon: IconComp, title, desc }) {

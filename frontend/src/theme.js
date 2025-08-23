@@ -1,17 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import theme from "./theme";
-import "./index.css";
+// src/theme.js
+import { extendTheme } from "@chakra-ui/react";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <ChakraProvider theme={theme}>
-    {/* системийн горимыг зөв оноох */}
-    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ChakraProvider>
-);
+const theme = extendTheme({
+  config: { initialColorMode: "system", useSystemColorMode: true },
+  fonts: {
+    heading: "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+    body: "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+  },
+  colors: {
+    brand: {
+      50: "#e3f2ff",
+      100: "#b7dcff",
+      200: "#8bc6ff",
+      300: "#5fb0ff",
+      400: "#339bff",
+      500: "#1a81e6",
+      600: "#1265b4",
+      700: "#0b4982",
+      800: "#053052",
+      900: "#011a2b",
+    },
+  },
+});
+
+export default theme;
