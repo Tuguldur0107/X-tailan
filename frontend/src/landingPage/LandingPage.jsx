@@ -1,46 +1,13 @@
 // src/landingPage/LandingPage.jsx
 import React from "react";
 import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  Button,
-  HStack,
-  VStack,
-  SimpleGrid,
-  useColorModeValue,
-  usePrefersReducedMotion,
-  Divider,
-  Badge,
-  Icon,
-  Link as CLink,
-  Grid,
-  GridItem,
-  Wrap,
-  WrapItem,
-  Tag,
-  Stack,
-  Center,
-  Kbd,
+  Box, Container, Heading, Text, Button, HStack, VStack, SimpleGrid,
+  useColorModeValue, usePrefersReducedMotion, Divider, Badge, Icon,
+  Link as CLink, Grid, GridItem, Wrap, WrapItem, Tag, Stack, Center, Kbd,
 } from "@chakra-ui/react";
 import {
-  ArrowRight,
-  Facebook,
-  BarChart3,
-  ShieldCheck,
-  Zap,
-  Lock,
-  Cloud,
-  Server,
-  Check,
-  Cpu,
-  Palette,
-  Route,
-  CloudCog,
-  Rocket,
-  Shield,
-  CreditCard,
+  ArrowRight, Facebook, BarChart3, ShieldCheck, Zap, Lock, Cloud, Server, Check,
+  Cpu, Palette, Route, CloudCog, Rocket, Shield, CreditCard,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/navbar/navbar";
@@ -55,6 +22,7 @@ function Tile({ children, as = "div", hover = true, ...rest }) {
   return (
     <MotionBox
       as={as}
+      tabIndex={0}
       bg={cardBg}
       borderWidth="1px"
       borderColor={border}
@@ -62,6 +30,7 @@ function Tile({ children, as = "div", hover = true, ...rest }) {
       p={{ base: 4, md: 5 }}
       shadow="elevated"
       position="relative"
+      outline="0"
       whileHover={hover && !prefersReducedMotion ? { y: -4, scale: 1.01 } : undefined}
       transition={{ type: "spring", stiffness: 180, damping: 18 }}
       _before={{
@@ -79,6 +48,7 @@ function Tile({ children, as = "div", hover = true, ...rest }) {
         pointerEvents: "none",
       }}
       _hover={{ _before: { opacity: 0.7 } }}
+      _focusVisible={{ boxShadow: "0 0 0 3px rgba(99,102,241,.35)", _before: { opacity: 0.9 } }}
       {...rest}
     >
       {children}
@@ -86,22 +56,20 @@ function Tile({ children, as = "div", hover = true, ...rest }) {
   );
 }
 
-function IconTitle({ icon: I, title, right }) {
+function IconTitle({ icon: I, title, right, gradient = true }) {
+  // rainbow headline gradient
+  const grad = "linear(to-r, #06B6D4, #6366F1, #A78BFA)";
   return (
     <HStack align="center" justify="space-between" mb={1}>
       <HStack spacing={2}>
         {I && (
-          <Center
-            w="38px"
-            h="38px"
-            rounded="xl"
-            borderWidth="1px"
-            borderColor="border.base"
-          >
+          <Center w="38px" h="38px" rounded="xl" borderWidth="1px" borderColor="border.base">
             <Icon as={I} boxSize={5} />
           </Center>
         )}
-        <Heading size="sm">{title}</Heading>
+        <Heading size="sm" {...(gradient ? { bgGradient: grad, bgClip: "text" } : {})}>
+          {title}
+        </Heading>
       </HStack>
       {right}
     </HStack>
@@ -118,17 +86,26 @@ export default function LandingPage() {
   const border     = useColorModeValue("border.base", "border.base");
   const ringBorder = useColorModeValue("brand.200", "whiteAlpha.400");
 
-  // gradient variables (text)
-  const gradMain = useColorModeValue(
-    "linear(to-r, brand.400, brand.700)",
-    "linear(to-r, brand.300, brand.500)"
-  );
-  const gradSub = useColorModeValue(
-    "linear(to-r, brand.300, brand.600)",
-    "linear(to-r, brand.400, brand.500)"
-  );
+  // 🌈 илүү өнгөлөг солонгорсон градиентууд
+  const gradMain = "linear(to-r, #22D3EE, #60A5FA, #A78BFA)";
+  const gradSub  = "linear(to-r, #22D3EE, #60A5FA, #A78BFA)";
 
-  // Content
+  // ... бусад const-уудын дор
+  const techItems = [
+    { icon: Cpu,    title: "React 18",        desc: "Concurrent, StrictMode." },
+    { icon: Palette,title: "Chakra UI",       desc: "Theme-тэй, responsive." },
+    { icon: Route,  title: "React Router v7", desc: "Route tree, lazy." },
+    { icon: Cloud,  title: "Axios",           desc: "Interceptors, retry." },
+  ];
+
+  const stepLines = [
+    "eTax, facebook аккаунуудаа холбож бүртгүүлэх.",
+    "Олон компанитай бол аль компанийг автоматаар удирдуулахыг сонгоно.",
+    "Систем танай компанийн тайлангийн төлөвийг автоматаар хянаж байдаг.",
+    "Хуулийн хугацаанд таны өмнөөс тайланг автоматаар илгээнэ.",
+    "Амжилттай илгээгдсэнийг Facebook Messenger-р шууд мэдэгдэнэ.",
+  ];
+
   const securityItems = [
     { icon: Lock,        title: "Нууц үг хадгалахгүй",    desc: "eTax нууц үгийг хадгалдаггүй, токеныг түр хугацаанд шифрлэж ашиглана." },
     { icon: ShieldCheck, title: "AES-256 шифрлэлт",       desc: "etax нэр, ent_id зэрэг эмзэг өгөгдлийг PostgreSQL дээр AES-256-аар шифрлэнэ." },
@@ -136,110 +113,105 @@ export default function LandingPage() {
     { icon: Check,       title: "Нууцлалын шалгалт",      desc: "Эмзэг байдлын скан, pen-test, Privacy Policy хэрэгжүүлэлт." },
   ];
 
-  const stepLines = [
-    "Messenger чатботоор өөрийн eTax аккаунтаар нэг удаа нэвтэрнэ.",
-    "Олон компанитай бол аль компанийг автоматаар удирдуулахыг сонгоно.",
-    "Систем танай компанийн тайлангийн төлөвийг автоматаар хянаж байдаг.",
-    "Хуулийн хугацаанд таны өмнөөс тайланг автоматаар илгээнэ.",
-    "Амжилттай илгээгдсэнийг Facebook Messenger-р шууд мэдэгдэнэ.",
-  ];
-
   return (
     <Box bg={pageBg} minH="100dvh">
       <Container maxW="7xl" px={{ base: 4, md: 8 }}>
         <Navbar />
 
-        {/* HERO: Mosaic */}
+        {/* HERO mosaic (жижиг боломжууд + төв самбар + CHIP СТЕК) */}
         <Stack direction={{ base: "column", lg: "row" }} spacing={6} pt={{ base: 8, md: 12 }} pb={{ base: 8, md: 10 }}>
           <Grid templateColumns={{ base: "repeat(6, 1fr)", lg: "repeat(8, 1fr)" }} gap={4} flex="1">
+            {/* жижиг плитууд */}
             <GridItem colSpan={{ base: 3, lg: 2 }}>
-              <Tile>
-                <IconTitle icon={Rocket} title="Автомат ажиллагаа" />
-                <Text color={muted} fontSize="sm">Тайланг хугацаанд нь <Kbd>auto</Kbd> илгээж, алдааг бууруулна.</Text>
+              <Tile><IconTitle icon={Rocket} title="Автомат ажиллагаа" gradient />
+                <Text color={muted} fontSize="sm">Тайланг хугацаанд нь <Kbd>auto</Kbd> илгээнэ.</Text>
               </Tile>
             </GridItem>
             <GridItem colSpan={{ base: 3, lg: 2 }}>
-              <Tile>
-                <IconTitle icon={Shield} title="Хамгаалалт" />
-                <Text color={muted} fontSize="sm">AES-256 шифрлэлт, 2FA, rate limit.</Text>
+              <Tile><IconTitle icon={Shield} title="Хамгаалалт" gradient />
+                <Text color={muted} fontSize="sm">AES-256, 2FA, rate limit.</Text>
               </Tile>
             </GridItem>
             <GridItem colSpan={{ base: 3, lg: 2 }}>
-              <Tile>
-                <IconTitle icon={CloudCog} title="Cloud дэд бүтэц" />
+              <Tile><IconTitle icon={CloudCog} title="Cloud дэд бүтэц" gradient />
                 <Text color={muted} fontSize="sm">Railway клауд, тасралтгүй ажиллагаа.</Text>
               </Tile>
             </GridItem>
             <GridItem colSpan={{ base: 3, lg: 2 }}>
-              <Tile>
-                <IconTitle icon={CreditCard} title="QPay төлбөр" />
+              <Tile><IconTitle icon={CreditCard} title="QPay төлбөр" gradient />
                 <Text color={muted} fontSize="sm">Хялбар, аюулгүй цэнэглэлт.</Text>
               </Tile>
             </GridItem>
 
-            {/* Center board */}
+            {/* төв самбар */}
             <GridItem colSpan={{ base: 6, lg: 8 }}>
               <Tile p={{ base: 5, md: 8 }} hover={false}>
                 <VStack spacing={4}>
                   <Heading size={{ base: "lg", md: "xl" }} textAlign="center" lineHeight={1.2}>
                     X тайлангаа март,{" "}
-                    <Text as="span" bgClip="text" bgGradient={gradMain}>
-                      X-SENDER-ийг ажиллуул
-                    </Text>
+                    <Text as="span" bgClip="text" bgGradient={gradMain}>X-SENDER-ийг ажиллуул</Text>
                   </Heading>
                   <Text textAlign="center" bgGradient={gradSub} bgClip="text" maxW="3xl">
                     Таны өмнөөс X тайланг хуулийн хугацаанд автоматаар илгээнэ
                   </Text>
                   <HStack spacing={3} wrap="wrap" justify="center">
-                    <Button size="lg" colorScheme="brand" rightIcon={<ArrowRight size={18} />} onClick={() => nav("/login")}>
-                      Системд нэвтрэх
-                    </Button>
+                    {/* НЭВТРЭХ CTA */}
                     <Button
                       size="lg"
-                      variant={useColorModeValue("outline", "solid")}
+                      variant="cta"
+                      role="group"            // group hover ашиглахын тулд
+                      onClick={() => nav("/login")}
+                    >
+                      <HStack spacing={2}>
+                        <Text>Системд нэвтрэх</Text>
+                        <Icon
+                          as={ArrowRight}
+                          boxSize={5}
+                          transition="transform .2s ease"
+                          _groupHover={{ transform: "translateX(4px)" }}
+                        />
+                      </HStack>
+                    </Button>
+
+                    {/* FACEBOOK STYLE */}
+                    <Button
+                      size="lg"
+                      variant="facebook"      // эсвэл "facebookOutline" хэрвээ тийм variant нэмсэн бол
                       leftIcon={<Facebook size={18} />}
-                      onClick={() => window.open("https://www.facebook.com/profile.php?id=61578621497518","_blank")}
+                      as={CLink}
+                      href="https://www.facebook.com/profile.php?id=61578621497518"
+                      isExternal
                     >
                       Facebook Page
                     </Button>
                   </HStack>
-                  <Wrap justify="center" spacing={3} pt={2}>
+
+
+                  {/* стек CHIP-үүд — зөвхөн энд нэг удаа */}
+                  {/* <Wrap justify="center" spacing={3} pt={2}>
                     {["React 18","Chakra UI","React Router v7","Axios","Framer Motion","Lucide Icons","Railway Cloud","eTax API"].map((t) => (
                       <WrapItem key={t}>
                         <Tag
-                          rounded="full"
-                          px={4}
-                          py={2}
+                          rounded="full" px={4} py={2}
                           variant="subtle"
-                          colorScheme="blue"
+                          bg={chipBg}
+                          color={chipColor}
                           transition="all .2s"
                           _hover={{
                             transform: prefersReducedMotion ? undefined : "translateY(-2px)",
-                            boxShadow: prefersReducedMotion ? undefined : "0 10px 20px rgba(99,102,241,.18)",
+                            boxShadow: chipHover,
                           }}
                         >
                           {t}
                         </Tag>
                       </WrapItem>
                     ))}
-                  </Wrap>
+                  </Wrap> */}
                 </VStack>
               </Tile>
             </GridItem>
 
-            {/* Bottom small tiles */}
-            <GridItem colSpan={{ base: 3, lg: 2 }}>
-              <Tile><IconTitle icon={Cpu} title="React 18" /><Text color={muted} fontSize="sm">Concurrent, StrictMode.</Text></Tile>
-            </GridItem>
-            <GridItem colSpan={{ base: 3, lg: 2 }}>
-              <Tile><IconTitle icon={Palette} title="Chakra UI" /><Text color={muted} fontSize="sm">Theme-тэй, responsive.</Text></Tile>
-            </GridItem>
-            <GridItem colSpan={{ base: 3, lg: 2 }}>
-              <Tile><IconTitle icon={Route} title="React Router v7" /><Text color={muted} fontSize="sm">Route tree, lazy.</Text></Tile>
-            </GridItem>
-            <GridItem colSpan={{ base: 3, lg: 2 }}>
-              <Tile><IconTitle icon={Cloud} title="Axios" /><Text color={muted} fontSize="sm">Interceptors, retry.</Text></Tile>
-            </GridItem>
+            {/* ⚠️ Давхардал арилгахын тулд доорх “React/Chakra/Router/Axios” жижиг плитуудыг АВСАН */}
           </Grid>
         </Stack>
 
@@ -256,45 +228,26 @@ export default function LandingPage() {
           </Text>
         </Tile>
 
-        {/* NEW: LEFT How it works + RIGHT Pricing */}
+        {/* HOW IT WORKS (зүүн) + PRICING (баруун) */}
         <Grid templateColumns={{ base: "1fr", lg: "1fr 420px" }} gap={6} alignItems="start" mb={12}>
-          {/* LEFT: How it works */}
+          {/* LEFT: how it works */}
           <Box>
-            <Heading size="lg" mb={4} bgGradient={gradMain} bgClip="text">
-              Хэрхэн ажилладаг вэ?
-            </Heading>
+            <Heading size="lg" mb={4} bgGradient={gradMain} bgClip="text">Хэрхэн ажилладаг вэ?</Heading>
             <VStack spacing={4} align="stretch">
               {["Нэвтрэх","Компанийн сонголт","Тайлангийн жагсаалт","Автомат илгээх","Мэдэгдэл"].map((title, idx) => (
                 <Tile key={idx} p={6} position="relative">
                   <Box
-                    position="absolute"
-                    left={4}
-                    top={4}
-                    w="42px"
-                    h="42px"
-                    rounded="full"
-                    bgGradient="linear(to-br, brand.500, brand.700)"
-                    color="white"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    fontWeight="bold"
-                    fontSize="md"
-                    boxShadow="0 8px 16px rgba(99,102,241,.35)"
-                    _after={{
-                      content: '""',
-                      position: "absolute",
-                      inset: "-4px",
-                      rounded: "full",
-                      border: "2px solid",
-                      borderColor: ringBorder,
-                    }}
+                    position="absolute" left={4} top={4} w="42px" h="42px"
+                    rounded="full" bgGradient="linear(to-br, brand.500, brand.700)" color="white"
+                    display="flex" alignItems="center" justifyContent="center"
+                    fontWeight="bold" fontSize="md" boxShadow="0 8px 16px rgba(99,102,241,.35)"
+                    _after={{ content: '""', position: "absolute", inset: "-4px", rounded: "full",
+                      border: "2px solid", borderColor: ringBorder }}
                   >
                     {idx + 1}
                   </Box>
                   <VStack align="start" pl="60px" spacing={1}>
                     <Heading size="md">{title}</Heading>
-                    {/* desc text as gradient */}
                     <Text bgGradient={gradSub} bgClip="text">{stepLines[idx]}</Text>
                   </VStack>
                 </Tile>
@@ -302,98 +255,72 @@ export default function LandingPage() {
             </VStack>
           </Box>
 
-          {/* RIGHT: Pricing */}
+          {/* RIGHT: pricing */}
           <Box>
-            <Heading size="lg" mb={4} textAlign="left" bgGradient={gradMain} bgClip="text">
-              💳 Үнэ төлбөр
-            </Heading>
+            <Heading size="lg" mb={4} textAlign="left" bgGradient={gradMain} bgClip="text">Үнэ төлбөр</Heading>
             <Tile as={Box} p={{ base: 6, md: 8 }}>
-              <HStack justify="space-between" mb={3}>
+              {/* <HStack justify="space-between" mb={3}>
                 <Heading size="md" color="brand.600">Стандарт</Heading>
-                <Badge colorScheme="brand" variant="subtle" rounded="full" px={3}>
-                  Хамгийн их ашиглагддаг
-                </Badge>
-              </HStack>
-
+                <Badge colorScheme="brand" variant="subtle" rounded="full" px={3}>Хамгийн их ашиглагддаг</Badge>
+              </HStack> */}
               <HStack align="baseline" spacing={2} mb={2} justify="center">
-                <Heading size="2xl" lineHeight={1} bgGradient={gradMain} bgClip="text">
-                  5,000₮
-                </Heading>
+                <Heading size="2xl" lineHeight={1} bgGradient={gradMain} bgClip="text">5,000₮</Heading>
                 <Text opacity={0.85}>/ тайлан</Text>
               </HStack>
-
-              <Text color={muted} mb={4}>Дараах нөхцөлтэйгээр энгийн, ойлгомжтой тариф.</Text>
-
+              {/* <Text color={muted} mb={4}>Дараах нөхцөлтэйгээр энгийн, ойлгомжтой тариф.</Text> */}
               <VStack align="start" spacing={3} color={muted}>
-                <HStack><Icon as={Check} color="green.500" /><Text>Эхний 3 тайлан үнэгүй — шинээр бүртгүүлсэнд автоматаар</Text></HStack>
-                <HStack><Icon as={Check} color="green.500" /><Text>Цэнэглэх дүн: <b>50,000₮</b> (10 тайлангийн эрх)</Text></HStack>
+                <HStack><Icon as={Check} color="green.500" /><Text>Шинэ хэрэглэгч бүрт эхний 3 тайлан үнэгүй </Text></HStack>
+                <HStack><Icon as={Check} color="green.500" /><Text>Цэнэглэх доод дүн: <b>50,000₮</b> </Text></HStack>
                 <HStack><Icon as={Check} color="green.500" /><Text>Уян хатан зарцуулалт — тайлан бүрт 5,000₮ суутна</Text></HStack>
                 <HStack><Icon as={Check} color="green.500" /><Text>QPay-ээр аюулгүй төлбөр тооцоо</Text></HStack>
               </VStack>
-
-              <Button
-                mt={6}
-                size="md"
-                colorScheme="brand"
-                leftIcon={<Icon as={Check} />}
-                w="full"
+              <Button mt={6} size="md" colorScheme="brand" leftIcon={<Icon as={Check} />} w="full"
                 onClick={() => nav("/payment")}
-                transition="all .2s"
-                _hover={{ transform: prefersReducedMotion ? undefined : "translateY(-2px)" }}
-              >
+                _hover={{ transform: prefersReducedMotion ? undefined : "translateY(-2px)" }}>
                 QPay-ээр цэнэглэх
               </Button>
             </Tile>
           </Box>
         </Grid>
 
-        {/* VALUE PROPS */}
-        <Heading size="lg" mb={4} bgGradient={gradMain} bgClip="text">Яагаад X-SENDER?</Heading>
-        <SimpleGrid columns={{ base: 1, md: 3 }} gap={4} mb={12}>
-          {[
-            { icon: Zap,          title: "Хурдтай",            desc: "Процессийг автоматжуулж, 1–2 минутанд бэлэн болгоно." },
-            { icon: ShieldCheck,  title: "Найдвартай",         desc: "Алдааны менежмент, баталгаажуулалттай." },
-            { icon: BarChart3,    title: "Өргөтгөх боломжтой", desc: "Дараа нь бусад тайлан, нэгжүүдийг холбох архитектур." },
-          ].map((f, i) => (
-            <Tile key={i}><IconTitle icon={f.icon} title={f.title} /><Text color={muted}>{f.desc}</Text></Tile>
-          ))}
-        </SimpleGrid>
+        {/* ✅ Зүүн — Технологи / Баруун — Аюулгүй байдал (ижил дизайн) */}
+        <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={6} alignItems="start" mb={12}>
+          {/* LEFT: Технологи */}
+          <Box>
+            <Heading size="lg" mb={4} bgGradient={gradMain} bgClip="text">
+              Технологи
+            </Heading>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+              {techItems.map((t) => (
+                <Tile key={t.title}>
+                  <IconTitle icon={t.icon} title={t.title} gradient />
+                  <Text color={muted}>{t.desc}</Text>
+                </Tile>
+              ))}
+            </SimpleGrid>
+          </Box>
 
-        {/* SECURITY */}
-        <Heading size="lg" mb={4} bgGradient={gradMain} bgClip="text">🔒 Аюулгүй байдал</Heading>
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap={4} mb={12}>
-          {securityItems.map((f, i) => (
-            <Tile key={i}>
-              <HStack mb={2} spacing={3}><Icon as={f.icon} boxSize={6} /><Heading size="md">{f.title}</Heading></HStack>
-              <Text color={muted}>{f.desc}</Text>
-            </Tile>
-          ))}
-        </SimpleGrid>
+          {/* RIGHT: Аюулгүй байдал */}
+          <Box>
+            <Heading size="lg" mb={4} bgGradient={gradMain} bgClip="text">
+              Аюулгүй байдал
+            </Heading>
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+              {securityItems.map((f) => (
+                <Tile key={f.title}>
+                  <IconTitle icon={f.icon} title={f.title} gradient />
+                  <Text color={muted}>{f.desc}</Text>
+                </Tile>
+              ))}
+            </SimpleGrid>
+          </Box>
+        </Grid>
 
-        {/* TECHNOLOGY */}
-        <Heading size="lg" mb={2} bgGradient={gradMain} bgClip="text">🚀 Технологийн шийдэл</Heading>
-        <Text fontSize="lg" mb={8} color={muted} maxW="700px">
-          X-SENDER нь eTax системтэй албан ёсны API-р шууд холбогдож, найдвартай клауд дэд бүтэц дээр ажилладаг.
-          Орчин үеийн технологиудыг ашиглан хурдтай, найдвартай, өргөтгөх боломжтой шийдлийг санал болгож байна.
-        </Text>
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap={4} mb={6}>
-          {[
-            { icon: Cloud,        title: "Cloud дэд бүтэц",     desc: "Railway клауд дээр байршуулсан, тасралтгүй ажиллагаатай, scale-д бэлэн орчин." },
-            { icon: Server,       title: "Сүүлийн үеийн фреймворк", desc: "React 18, Chakra UI, React Router v7, Axios, Framer Motion." },
-            { icon: ShieldCheck,  title: "Хамгаалалт",          desc: "Нууцлал, AES-256 шифрлэлт, CI/CD, логжуулалт, мониторинг." },
-            { icon: Rocket,       title: "Автомат ажиллагаа",  desc: "Оролцоогүйгээр урсгалыг автоматжуулж, алдаагүй тайлан илгээнэ." },
-          ].map((f, i) => (
-            <Tile key={i}><IconTitle icon={f.icon} title={f.title} /><Text color={muted}>{f.desc}</Text></Tile>
-          ))}
-        </SimpleGrid>
 
         {/* FOOTER */}
         <VStack as="footer" py={10} spacing={2} opacity={0.9}>
           <Divider />
-          <HStack>
-            <Heading size="sm">X-Sender</Heading>
-            <Badge colorScheme="brand">beta</Badge>
-          </HStack>
+          <HStack><Heading size="sm">X-Sender</Heading><Badge colorScheme="brand">beta</Badge></HStack>
           <CLink href="mailto:hello@x-sender.mn" fontSize="sm">hello@x-sender.mn</CLink>
         </VStack>
       </Container>
