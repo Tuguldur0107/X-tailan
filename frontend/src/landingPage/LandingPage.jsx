@@ -74,7 +74,7 @@ export default function LandingPage() {
               size="lg"
               variant={useColorModeValue("outline", "solid")}
               leftIcon={<Facebook size={18} />}
-              onClick={() => window.open("https://facebook.com/yourpage", "_blank")}
+              onClick={() => window.open("https://www.facebook.com/profile.php?id=61578621497518", "_blank")}
             >
               Facebook хуудас
             </Button>
