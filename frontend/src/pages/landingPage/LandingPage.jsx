@@ -12,8 +12,8 @@ import {
   Cpu, Palette, Route, CloudCog, Rocket, Shield, CreditCard,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/navbar/navbar";
-import MotionBox from "../components/MotionBox/MotionBox";
+import Navbar from "../../components/navbar/navbar";
+import MotionBox from "../../components/MotionBox/MotionBox";
 
 // ---------- Small building blocks ----------
 function Tile({ children, as = "div", hover = true, ...rest }) {

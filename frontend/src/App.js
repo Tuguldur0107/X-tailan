@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
 // ПУБЛИК
-import LandingPage from "./landingPage/LandingPage";
+import LandingPage from "./pages/landingPage/LandingPage";
 
 // ЛОГИН + ДАРААХ ХУУДАСНУУД
 import Home from "./pages/home/Home";
