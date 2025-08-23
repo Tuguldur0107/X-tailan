@@ -1,22 +1,18 @@
-import React, { useState } from "react";
-import LandingPage from "./pages/LandingPage";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+import { Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/home/Home.jsx'
+import Company from './pages/company/Company.jsx';
 
 function App() {
-  const [page, setPage] = useState("landing");
-
-  const goLogin = () => setPage("login");
-  const goDashboard = () => setPage("dashboard");
-  const goLanding = () => setPage("landing");
-
-  return (
-    <div>
-      {page === "landing" && <LandingPage onLogin={goLogin} />}
-      {page === "login" && <Login onSuccess={goDashboard} onBack={goLanding} />}
-      {page === "dashboard" && <Dashboard onLogout={goLanding} />}
-    </div>
-  );
+    return (
+        <Router>
+            <Suspense fallback={<div>...</div>} />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/company" element={<Company />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
