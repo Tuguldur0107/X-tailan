@@ -1,49 +1,280 @@
-import { Box, Container, VStack, Heading, Text, HStack, Button, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
-import Navbar from '../../components/navbar/navbar';
-import { ArrowRight, Facebook, BarChart3 } from "lucide-react";
+// src/pages/home/Home.jsx
+import React, { useMemo, useState } from "react";
+import {
+  Box, Container, Grid, GridItem, Heading, HStack, VStack, Text, Button, Badge,
+  Switch, StackDivider, useDisclosure, useColorModeValue, usePrefersReducedMotion, Collapse
+} from "@chakra-ui/react";
+import { ArrowRight, CreditCard, RefreshCw, Eye, AlertTriangle, ChevronDown, ChevronUp, Link2, Facebook } from "lucide-react";
 
-function Feature({ icon: IconComp, title, desc }) {
+// ✅ Navbar + Footer
+import Navbar from "../../components/navbar/navbar";
+import Footer from "../../components/footer/footer";
+
+import StatCard from "../../components/card/card";
+import GenericTable from "../../components/table/table";
+import ReportStatusBadge from "../../components/status/ReportStatusBadge";
+import FailureDrawer from "../../components/modals/FailureDrawer";
+
+// --- Gradient ring wrapper (landing шиг hover хүрээ) ---
+function HoverRing({ children, rounded = "2xl", p = 0, hover = true, ...rest }) {
+  const prefersReducedMotion = usePrefersReducedMotion();
   return (
-    <VStack align="start" p={5} rounded="xl" borderWidth="1px" borderColor={useColorModeValue("gray.200", "whiteAlpha.200")}>
-      <HStack><IconComp /><Heading size="sm">{title}</Heading></HStack>
-      <Text fontSize="sm" opacity={0.9}>{desc}</Text>
-    </VStack>
+    <Box
+      position="relative"
+      rounded={rounded}
+      p={p}
+      transition="transform .18s ease"
+      _before={{
+        content: '""',
+        position: "absolute",
+        inset: 0,
+        rounded,
+        padding: "1px",
+        bgGradient: "linear(to-br, brand.500, brand.300)",
+        opacity: 0,
+        transition: "opacity .2s ease",
+        WebkitMask: "linear-gradient(#000,#000) content-box, linear-gradient(#000,#000)",
+        WebkitMaskComposite: "xor",
+        pointerEvents: "none",
+      }}
+      _hover={
+        hover
+          ? { _before: { opacity: 0.7 }, ...(prefersReducedMotion ? {} : { transform: "translateY(-3px)" }) }
+          : undefined
+      }
+      _focusWithin={{ boxShadow: "0 0 0 3px rgba(99,102,241,.35)", _before: { opacity: 0.9 } }}
+      {...rest}
+    >
+      {children}
+    </Box>
   );
 }
 
+// --- MOCK data ---
+const MOCK = {
+  stats: { connectedCompanies: 2, sentLast30: 12, successRate: 0.92, avgDurationMin: 1.8 },
+  companies: [
+    { id: "io", name: "IO Tech LLC", reg: "1234567", connected: true },
+    { id: "chip", name: "Chipmo LLC", reg: "9876543", connected: false },
+  ],
+  reports: [
+    { id: "XT-2025-08-01", company: "IO Tech LLC", period: "2025/07", status: "SENT", date: "2025-08-15 10:12" },
+    { id: "XT-2025-07-01", company: "Chipmo LLC", period: "2025/06", status: "FAILED", date: "2025-07-15 09:05",
+      failure: { reason: "ТТД-1 маягтын нийлбэр таарахгүй.\nДэлгэрэнгүй: мөр 12-т 0 биш.", etaxChatUrl: "https://etax.example/chat/123" } },
+    { id: "XT-2025-06-01", company: "IO Tech LLC", period: "2025/05", status: "SENT", date: "2025-06-15 11:42" },
+  ],
+  autosend: { io: { "x-null": true, "x-vat": false }, chip: { "x-null": false, "x-vat": false } },
+  etaxOnlyReports: [ { code: "x-vat", name: "НӨАТ", company: "IO Tech LLC" }, { code: "x-employee", name: "ХАОАТ ажилтан", company: "Chipmo LLC" } ],
+  usageThisMonth: [
+    { at: "2025-08-01 09:05", item: "X тайлан (IO Tech LLC · 2025/07)", amount: 5000 },
+    { at: "2025-08-01 10:40", item: "X тайлан (Chipmo LLC · 2025/06)", amount: 5000 },
+    { at: "2025-08-02 08:32", item: "X тайлан (IO Tech LLC · 2025/07 Дахин илгээх)", amount: 0 },
+    { at: "2025-08-02 15:18", item: "X тайлан (IO Tech LLC · 2025/07 Баталгаажсан)", amount: 5000 },
+    { at: "2025-08-03 11:55", item: "X тайлан (Chipmo LLC · 2025/06 Дахин илгээх)", amount: 0 },
+    { at: "2025-08-03 16:07", item: "X тайлан (Chipmo LLC · 2025/06 Баталгаажсан)", amount: 5000 },
+    { at: "2025-08-04 09:22", item: "X тайлан (IO Tech LLC · 2025/07)", amount: 5000 },
+    { at: "2025-08-05 14:01", item: "X тайлан (Chipmo LLC · 2025/07)", amount: 5000 },
+    { at: "2025-08-06 10:30", item: "X тайлан (IO Tech LLC · 2025/07 Дахин илгээх)", amount: 0 },
+    { at: "2025-08-06 12:44", item: "X тайлан (IO Tech LLC · 2025/07 Баталгаажсан)", amount: 5000 },
+    { at: "2025-08-07 09:10", item: "X тайлан (Chipmo LLC · 2025/07 Дахин илгээх)", amount: 0 },
+    { at: "2025-08-07 09:58", item: "X тайлан (Chipmo LLC · 2025/07 Баталгаажсан)", amount: 5000 },
+    { at: "2025-08-09 11:02", item: "X тайлан (IO Tech LLC · 2025/07)", amount: 5000 },
+    { at: "2025-08-11 13:20", item: "X тайлан (Chipmo LLC · 2025/06)", amount: 5000 },
+    { at: "2025-08-13 09:48", item: "X тайлан (IO Tech LLC · 2025/07 Дахин илгээх)", amount: 0 },
+    { at: "2025-08-13 10:05", item: "X тайлан (IO Tech LLC · 2025/07 Баталгаажсан)", amount: 5000 },
+    { at: "2025-08-18 15:35", item: "X тайлан (Chipmo LLC · 2025/07)", amount: 5000 },
+    { at: "2025-08-22 08:26", item: "X тайлан (IO Tech LLC · 2025/07)", amount: 5000 },
+    { at: "2025-08-25 10:12", item: "X тайлан (Chipmo LLC · 2025/07)", amount: 5000 },
+    { at: "2025-08-29 17:45", item: "X тайлан (IO Tech LLC · 2025/07)", amount: 5000 },
+  ],
+};
+
 export default function Home() {
+  const [auto, setAuto] = useState(MOCK.autosend);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedFailure, setSelectedFailure] = useState(null);
+  const [showUsage, setShowUsage] = useState(false);
+
+  const ghost  = useColorModeValue("blackAlpha.100", "whiteAlpha.100");
+  const header = useColorModeValue("gray.700", "gray.200");
+
+  const reportColumns = useMemo(() => [
+    { key: "id", title: "ID" },
+    { key: "company", title: "Компани" },
+    { key: "period", title: "Тайлант үе" },
+    { key: "status", title: "Төлөв", render: (row) => <ReportStatusBadge status={row.status} /> },
+    { key: "date", title: "Огноо" },
+    { key: "actions", title: "", render: (row) => row.status === "FAILED" ? (
+      <Button size="xs" leftIcon={<AlertTriangle size={14} />} onClick={(e) => {
+        e.stopPropagation();
+        setSelectedFailure({ reportId: row.id, company: row.company, period: row.period, reason: row.failure?.reason || "Шалтгаан тодорхойгүй.", etaxChatUrl: row.failure?.etaxChatUrl || "https://etax.example/chat" });
+        onOpen();
+      }}>Шалтгаан харах</Button>
+    ) : null },
+  ], [onOpen]);
+
+  const autosendColumns = [
+    { key: "name", title: "Тайлан" },
+    { key: "io", title: "IO Tech LLC", render: (r) => (
+      <Switch isChecked={!!auto.io[r.code]} onChange={(e) => setAuto((s) => ({ ...s, io: { ...s.io, [r.code]: e.target.checked } }))} />
+    ) },
+    { key: "chip", title: "Chipmo LLC", render: (r) => (
+      <Switch isChecked={!!auto.chip[r.code]} onChange={(e) => setAuto((s) => ({ ...s, chip: { ...s.chip, [r.code]: e.target.checked } }))} />
+    ) },
+  ];
+
+  const usageColumns = useMemo(() => [
+    { key: "at", title: "Огноо/цаг", width: "190px" },
+    { key: "item", title: "Гүйлгээ" },
+    { key: "amount", title: "Дүн", width: "120px", render: (r) => <Text fontWeight="semibold">{r.amount.toLocaleString()} ₮</Text> },
+  ], []);
+
   return (
-    <Box bg={useColorModeValue("gray.50", "gray.900")} minH="100dvh">
-      <Container maxW="6xl">
-        <Navbar />
-        <VStack pt={{ base: 10, md: 20 }} pb={{ base: 10, md: 16 }} spacing={6} textAlign="center">
-          <Heading size={{ base: "xl", md: "2xl" }}>
-            X‑тайлангаа <Text as="span" color="brand.400">автоматаар</Text> илгээгээрэй
-          </Heading>
-          <Text fontSize={{ base: "md", md: "lg" }} maxW="720px">
-            eTax интеграц нь дараагийн шатанд. Одоогоор фронт‑энд демо.
-          </Text>
-          <HStack>
-            <Button as="a" href="/login" size="lg" colorScheme="brand" rightIcon={<ArrowRight size={18} />}>
-              Систем рүү нэвтрэх
-            </Button>
-            <Button
-              size="lg"
-              variant={useColorModeValue("outline", "solid")}
-              leftIcon={<Facebook size={18} />}
-              onClick={() => window.open("https://facebook.com/yourpage", "_blank")}
-            >
-              Facebook хуудас
-            </Button>
-          </HStack>
+    <>
+      {/* NAVBAR */}
+      <Navbar />
+
+      <Container maxW="7xl" px={{ base: 4, md: 8 }} py={6}>
+        {/* 🔗 Top connect buttons — илүү сүртэй, төвд */}
+        <VStack mb={6} align="center">
+          <HoverRing p={3}>
+            <HStack spacing={4} flexWrap="wrap" justify="center">
+              <Button size="lg" leftIcon={<Link2 size={18} />} colorScheme="brand" rounded="2xl" px={6} onClick={() => alert("eTax OAuth (mock)")}
+                _hover={{ transform: "translateY(-2px)" }}>eTax холбох</Button>
+              <Button size="lg" leftIcon={<Facebook size={18} />} colorScheme="blue" rounded="2xl" px={6} onClick={() => alert("Facebook OAuth (mock)")}
+                _hover={{ transform: "translateY(-2px)" }}>Facebook холбох</Button>
+            </HStack>
+          </HoverRing>
         </VStack>
 
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={5} mb={12}>
-          <Feature icon={BarChart3} title="Хурдтай" desc="1–2 минутын урсгал." />
-          <Feature icon={ArrowRight} title="Энгийн нэвтрэлт" desc="Дараа нь eTax‑тай уялдах." />
-          <Feature icon={ArrowRight} title="Өргөтгөх боломжтой" desc="Бусад тайлан нэмэх архитектур." />
-        </SimpleGrid>
+        {/* Top stats */}
+        <Grid templateColumns={{ base: "1fr", md: "repeat(4, 1fr)" }} gap={4}>
+          <HoverRing><StatCard title="Холбогдсон компани" value={MOCK.stats.connectedCompanies} delta="+1" deltaColor="green" /></HoverRing>
+          <HoverRing><StatCard title="Сүүлийн 30 хоногт илгээсэн" value={`${MOCK.stats.sentLast30} тайлан`} /></HoverRing>
+          <HoverRing><StatCard title="Амжилттай хувь" value={`${Math.round(MOCK.stats.successRate * 100)}%`} /></HoverRing>
+          <HoverRing><StatCard title="Дундаж хугацаа" value={`${MOCK.stats.avgDurationMin} мин`} /></HoverRing>
+        </Grid>
+
+        {/* History */}
+        <Box mt={8}>
+          <HStack mb={3} justify="space-between">
+            <Heading size="md" color={header}>X тайлангийн түүх</Heading>
+            <Button size="sm" variant="ghost" rightIcon={<ArrowRight size={16} />} _hover={{ bg: ghost }}>Бүгдийг харах</Button>
+          </HStack>
+          <HoverRing p={0}>
+            <GenericTable columns={reportColumns} data={MOCK.reports} rowKey={(r) => r.id} onRowClick={(r) => {
+              if (r.status === "FAILED") {
+                setSelectedFailure({ reportId: r.id, company: r.company, period: r.period, reason: r.failure?.reason, etaxChatUrl: r.failure?.etaxChatUrl });
+                onOpen();
+              }
+            }} />
+          </HoverRing>
+        </Box>
+
+        {/* Companies + Autosend (LEFT)  |  Balance (RIGHT) */}
+        <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={6} mt={8}>
+          <GridItem>
+            {/* Companies */}
+            <Heading size="md" mb={3} color={header}>Бүртгэлтэй компаниуд</Heading>
+            <HoverRing p={0}>
+              <VStack divider={<StackDivider />} spacing={0} borderWidth="1px" rounded="2xl" overflow="hidden" bg={useColorModeValue("whiteAlpha.600","blackAlpha.400")} style={{ backdropFilter: "saturate(180%) blur(8px)" }}>
+                {MOCK.companies.map((c) => (
+                  <HStack key={c.id} w="full" p={4} justify="space-between" _hover={{ bg: ghost }}>
+                    <VStack align="start" spacing={0}>
+                      <HStack>
+                        <Text fontWeight="semibold">{c.name}</Text>
+                        <Badge colorScheme={c.connected ? "green" : "yellow"} rounded="lg" variant="subtle">{c.connected ? "ХОЛБОГДСОН" : "ХОЛБОХ ХЭРЭГТЭЙ"}</Badge>
+                      </HStack>
+                      <Text fontSize="sm" color="gray.500">Регистер: {c.reg}</Text>
+                    </VStack>
+                    <HStack>
+                      <Button size="sm" variant="outline" leftIcon={<Eye size={16} />}>Нээх</Button>
+                      {!c.connected && <Button size="sm" colorScheme="brand">Холбох</Button>}
+                    </HStack>
+                  </HStack>
+                ))}
+              </VStack>
+            </HoverRing>
+
+            {/* Autosend matrix under companies */}
+            <Box mt={8}>
+              <Heading size="md" mb={3} color={header}>X-ээр автомат илгээх тохиргоо</Heading>
+              <HoverRing p={0}>
+                <GenericTable columns={autosendColumns} data={[{ code: "x-null", name: "X тайлан (үйл ажиллагаагүй)" }, { code: "x-vat", name: "НӨАТ" }]} rowKey={(r) => r.code} emptyMessage="Тохируулга алга." />
+              </HoverRing>
+            </Box>
+          </GridItem>
+
+            {/* Balance on the right */}
+            <GridItem>
+              <Heading size="md" mb={3} color={header}>Дансны үлдэгдэл</Heading>
+              <HoverRing>
+                <VStack
+                  align="stretch"
+                  spacing={4}
+                  borderWidth="1px"
+                  rounded="2xl"
+                  p={5}
+                  bg={useColorModeValue("whiteAlpha.700", "blackAlpha.500")}
+                  style={{ backdropFilter: "saturate(180%) blur(8px)" }}
+                >
+                  {/* --- Одоогийн үлдэгдэл — илүү “сүртэй” --- */}
+                  <Box>
+                    <Text color="gray.500" fontSize="sm">Одоогийн үлдэгдэл</Text>
+                    <HStack spacing={3} align="baseline">
+                      <Heading
+                        size="2xl"
+                        lineHeight={1}
+                        bgGradient="linear(to-r, brand.400, brand.600)"
+                        bgClip="text"
+                      >
+                        185,000 ₮
+                      </Heading>
+                    </HStack>
+                  </Box>
+
+                  {/* --- Энэ сарын хэрэглээ + Хэрэглээг харах (нэг мөр) --- */}
+                  <HStack justify="space-between" w="full">
+                    <HStack color="gray.500" fontSize="sm">
+                      <RefreshCw size={14} />
+                      <Text>Энэ оны хэрэглээ: <b>65,000 ₮</b></Text>
+                    </HStack>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setShowUsage((v) => !v)}
+                      rightIcon={showUsage ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                      _hover={{ bg: ghost }}
+                    >
+                      Хэрэглээг харах
+                    </Button>
+                  </HStack>
+
+                  <Collapse in={showUsage} animateOpacity>
+                    <Box mt={2} maxH="300px" overflowY="auto" pr={1}>
+                      <GenericTable
+                        columns={usageColumns}
+                        data={MOCK.usageThisMonth}
+                        rowKey={(r, i) => `${r.at}-${i}`}
+                        size="sm"
+                      />
+                    </Box>
+                  </Collapse>
+
+                  <Button leftIcon={<CreditCard size={16} />} rounded="xl" colorScheme="brand">
+                    Дахин цэнэглэх
+                  </Button>
+                </VStack>
+              </HoverRing>
+            </GridItem>
+          </Grid>
+
+        {/* failure drawer */}
+        <FailureDrawer isOpen={isOpen} onClose={onClose} failure={selectedFailure} />
       </Container>
-    </Box>
+
+      {/* FOOTER */}
+      <Footer />
+    </>
   );
 }
