@@ -63,7 +63,7 @@ const MOCK = {
       failure: { reason: "ТТД-1 маягтын нийлбэр таарахгүй.\nДэлгэрэнгүй: мөр 12-т 0 биш.", etaxChatUrl: "https://etax.example/chat/123" } },
     { id: "XT-2025-06-01", company: "IO Tech LLC", period: "2025/05", status: "SENT", date: "2025-06-15 11:42" },
   ],
-  autosend: { io: { "x-null": true, "x-vat": false }, chip: { "x-null": false, "x-vat": false } },
+  autosend: { io: { "x-cit": true, "x-pit": false, "x-vat": false }, chip: { "x-pit": false, "x-cit": false, "x-vat": false } },
   etaxOnlyReports: [ { code: "x-vat", name: "НӨАТ", company: "IO Tech LLC" }, { code: "x-employee", name: "ХАОАТ ажилтан", company: "Chipmo LLC" } ],
   usageThisMonth: [
     { at: "2025-08-01 09:05", item: "X тайлан (IO Tech LLC · 2025/07)", amount: 5000 },
@@ -200,7 +200,7 @@ export default function Home() {
             <Box mt={8}>
               <Heading size="md" mb={3} color={header}>X-ээр автомат илгээх тохиргоо</Heading>
               <HoverRing p={0}>
-                <GenericTable columns={autosendColumns} data={[{ code: "x-null", name: "X тайлан (үйл ажиллагаагүй)" }, { code: "x-vat", name: "НӨАТ" }]} rowKey={(r) => r.code} emptyMessage="Тохируулга алга." />
+                <GenericTable columns={autosendColumns} data={[{ code: "x-pit", name: "XХОАТ" }, { code: "x-cit", name: "ААНОАТ" }, { code: "x-vat", name: "НӨАТ" }]} rowKey={(r) => r.code} emptyMessage="Тохируулга алга." />
               </HoverRing>
             </Box>
           </GridItem>

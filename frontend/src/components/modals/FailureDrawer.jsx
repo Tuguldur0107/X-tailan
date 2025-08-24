@@ -20,7 +20,7 @@ export default function FailureDrawer({ isOpen, onClose, failure }) {
             <VStack align="start" spacing={4}>
               <HStack><Text fontWeight="bold">Тайлан:</Text><Code>{failure.reportId}</Code></HStack>
               <HStack><Text fontWeight="bold">Компани:</Text><Text>{failure.company}</Text></HStack>
-              <HStack><Text fontWeight="bold">Период:</Text><Text>{failure.period}</Text></HStack>
+              <HStack><Text fontWeight="bold">Тайлант үе:</Text><Text>{failure.period}</Text></HStack>
               <VStack align="start" spacing={2}>
                 <Text fontWeight="bold">Шалтгаан:</Text>
                 <Code whiteSpace="pre-wrap" p={3} rounded="md" width="full">
