@@ -7,6 +7,7 @@ import LandingPage from "./pages/landingPage/LandingPage";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Company from "./pages/company/Company";
+import Register from "./pages/register/Register";
 
 // Одоо mock хамгаалалт (дараа нь backend-тэй солино)
 const isAuthed = () => localStorage.getItem("authed") === "1";
@@ -25,6 +26,8 @@ export default function App() {
 
       {/* fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />
+
+       <Route path="/register" element={<Register />} />
     </Routes>
   );
 }

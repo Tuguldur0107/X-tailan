@@ -9,7 +9,8 @@ import {
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Facebook } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import MotionBox from "../../components/MotionBox/MotionBox";
-import Navbar from "../../components/navbar/navbar"; // ← Нэмсэн
+import Navbar from "../../components/navbar/navbar";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Login() {
   const toast = useToast();
@@ -171,6 +172,20 @@ export default function Login() {
               >
                 Facebook-р нэвтрэх
               </Button>
+
+              {/* ✅ Register link */}
+              <HStack justify="center" pt={1}>
+                <Text fontSize="sm" color={muted}>Шинэ хэрэглэгч үү?</Text>
+                <CLink
+                  as={RouterLink}
+                  to="/register"
+                  color="brand.500"
+                  fontWeight="semibold"
+                  onClick={() => nav("/register")}
+                >
+                  Бүртгүүлэх
+                </CLink>
+              </HStack>
 
               <Text fontSize="xs" color={muted} textAlign="center" mt={2}>
                 Нэвтэрснээр та манай Terms & Privacy-г зөвшөөрсөнд тооцно.
