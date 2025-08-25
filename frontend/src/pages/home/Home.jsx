@@ -1,8 +1,9 @@
 // src/pages/home/Home.jsx
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import {
-  Box, Container, Grid, GridItem, Heading, HStack, VStack, Text, Button, Badge,
-  Switch, StackDivider, useDisclosure, useColorModeValue, usePrefersReducedMotion, Collapse
+  Box, Container, Grid, GridItem, Heading, HStack, VStack, Text, Button, Badge, useToast,
+  Switch, StackDivider, useDisclosure, useColorModeValue, usePrefersReducedMotion, Collapse,
+  AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogBody, AlertDialogFooter 
 } from "@chakra-ui/react";
 import { ArrowRight, CreditCard, RefreshCw, Eye, AlertTriangle, ChevronDown, ChevronUp, Link2, Facebook } from "lucide-react";
 
@@ -51,6 +52,8 @@ function HoverRing({ children, rounded = "2xl", p = 0, hover = true, ...rest }) 
 }
 
 // --- MOCK data ---
+const REPORT_NAMES = { "x-pit": "ХХОАТ", "x-cit": "ААНОАТ", "x-vat": "НӨАТ" };
+const COMPANY_LABELS = { io: "IO Tech LLC", chip: "Chipmo LLC" };
 const MOCK = {
   stats: { connectedCompanies: 2, sentLast30: 12, successRate: 0.92, avgDurationMin: 1.8 },
   companies: [
@@ -94,6 +97,16 @@ export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedFailure, setSelectedFailure] = useState(null);
   const [showUsage, setShowUsage] = useState(false);
+  const toast = useToast();
+
+  // Toggle баталгаажуулалтын state
+  const [confirm, setConfirm] = useState({
+    open: false,
+    companyKey: null,   // 'io' | 'chip'
+    reportCode: null,   // 'x-pit' | 'x-cit' | 'x-vat'
+    nextValue: false
+    });
+  const cancelRef = useRef();
 
   const ghost  = useColorModeValue("blackAlpha.100", "whiteAlpha.100");
   const header = useColorModeValue("gray.700", "gray.200");
@@ -113,15 +126,51 @@ export default function Home() {
     ) : null },
   ], [onOpen]);
 
+  // Switch дарсан үед — зөвхөн баталгаажуулах модал нээнэ
+  const requestToggle = (companyKey, reportCode, nextValue) => {
+    setConfirm({ open: true, companyKey, reportCode, nextValue });
+  };
+  const applyToggle = async () => {
+    setAuto(s => ({
+      ...s,
+      [confirm.companyKey]: {
+        ...s[confirm.companyKey],
+        [confirm.reportCode]: confirm.nextValue
+      }
+    }));
+    // TODO: энд backend рүү хадгалах API дууд
+    // await api.saveAutosend(confirm.companyKey, confirm.reportCode, confirm.nextValue)
+
+    toast({
+      title: confirm.nextValue ? "Амжилттай асаалаа" : "Амжилттай унтраалаа",
+      description: `${COMPANY_LABELS[confirm.companyKey]} компанид ${REPORT_NAMES[confirm.reportCode]} тайлангийн тохиргоо шинэчлэгдлээ.`,
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+
+    setConfirm({ open: false, companyKey: null, reportCode: null, nextValue: false });
+  };
+  const cancelToggle = () => {
+    setConfirm({ open: false, companyKey: null, reportCode: null, nextValue: false });
+  };
+
   const autosendColumns = [
     { key: "name", title: "Тайлан" },
     { key: "io", title: "IO Tech LLC", render: (r) => (
-      <Switch isChecked={!!auto.io[r.code]} onChange={(e) => setAuto((s) => ({ ...s, io: { ...s.io, [r.code]: e.target.checked } }))} />
+      <Switch
+        isChecked={!!auto.io[r.code]}
+        onChange={(e) => requestToggle("io", r.code, e.target.checked)}
+      />
     ) },
     { key: "chip", title: "Chipmo LLC", render: (r) => (
-      <Switch isChecked={!!auto.chip[r.code]} onChange={(e) => setAuto((s) => ({ ...s, chip: { ...s.chip, [r.code]: e.target.checked } }))} />
+      <Switch 
+        isChecked={!!auto.chip[r.code]}
+        onChange={(e) => requestToggle("chip", r.code, e.target.checked)}
+      />
     ) },
   ];
+
 
   const usageColumns = useMemo(() => [
     { key: "at", title: "Огноо/цаг", width: "190px" },
@@ -147,6 +196,43 @@ export default function Home() {
           </HoverRing>
         </VStack>
 
+        {/* Toggle confirmation */}
+        <AlertDialog
+          isOpen={confirm.open}
+          leastDestructiveRef={cancelRef}
+          onClose={cancelToggle}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent rounded="2xl">
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                {confirm.nextValue ? "Автомат илгээхийг асаах уу?" : "Автомат илгээхийг унтраах уу?"}
+              </AlertDialogHeader>
+
+              <AlertDialogBody>
+                {COMPANY_LABELS[confirm.companyKey] && REPORT_NAMES[confirm.reportCode] ? (
+                  <Text>
+                    <b>{COMPANY_LABELS[confirm.companyKey]}</b> компанид{" "}
+                    <b>{REPORT_NAMES[confirm.reportCode]}</b> тайланг X‑ээр{" "}
+                    <b>{confirm.nextValue ? "АВТОМАТ ИЛГЭЭХ" : "АВТОМАТ ИЛГЭЭХЭЭС ХАСАХ"}</b> тохиргоо хийх гэж байна.
+                    Та баталгаажуулна уу.
+                  </Text>
+                ) : (
+                  <Text>Тохиргоо хийх үү?</Text>
+                )}
+              </AlertDialogBody>
+
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={cancelToggle} mr={3}>
+                  Үгүй
+                </Button>
+                <Button colorScheme="brand" onClick={applyToggle}>
+                  Тийм
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
+  
         {/* Top stats */}
         <Grid templateColumns={{ base: "1fr", md: "repeat(4, 1fr)" }} gap={4}>
           <HoverRing><StatCard title="Холбогдсон компани" value={MOCK.stats.connectedCompanies} delta="+1" deltaColor="green" /></HoverRing>
